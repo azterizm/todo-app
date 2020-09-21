@@ -1,0 +1,17 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+nav img:first-child {
+  width: 20px;
+}
+
+nav img:last-child {
+  width: 15px;
+}
+
+nav img {
+  padding: 30px 50px;
+}

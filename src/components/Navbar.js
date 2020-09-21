@@ -1,6 +1,7 @@
 import React from 'react';
 import menu from '../assets/menu.svg';
 import search from '../assets/magnifying-glass.svg';
+import '../styles/Navbar.css';
 
 export const Navbar = () => {
   return (

@@ -1,0 +1,160 @@
+.backButton {
+  float: right;
+}
+
+.backButton p {
+  display: block;
+  width: 54px;
+  height: 54px;
+  font-size: 34px;
+  color: #111f55;
+  border: 1px solid rgb(186, 191, 207);
+  border-radius: 50px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.addTodo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 85vh;
+  margin: 0;
+  padding: 0;
+  /* Cut the values of other elements */
+}
+
+input {
+  font-family: 'Montserrat', sans-serif;
+  padding: 20px;
+  width: 100%;
+  font-size: 20px;
+  border: none;
+  caret-color: #3576df;
+  color: #30323a;
+}
+
+input::placeholder {
+  color: #adb7e0;
+}
+
+input:focus,
+input:active {
+  outline: none;
+}
+
+input#input {
+  padding-bottom: 10px;
+  margin-top: 15vh;
+}
+
+input[type='datetime-local'] {
+  color: #adb7e0;
+}
+
+input[type='datetime-local'] + button {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  bottom: 335px;
+  right: 15%;
+  border-radius: 30px;
+  background-color: white;
+  border-color: #076aff;
+  color: #076aff;
+  opacity: 50%;
+}
+
+.dateTimePicker {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  border: 1px solid black;
+  border-radius: 30px;
+  border-color: #adb7e0;
+  width: 104px;
+  height: 40px;
+  margin-left: 20px;
+  margin-top: 20px;
+  padding-left: 20px;
+}
+
+.dateTimePicker p {
+  color: #adb7e0;
+}
+
+.dateTimePicker img {
+  filter: invert(63%) sepia(79%) saturate(169%) hue-rotate(192deg) brightness(103%)
+    contrast(81%);
+  width: 24px;
+}
+
+.submit {
+  font-family: Montserrat, sans-serif;
+  display: flex;
+  align-items: center;
+  float: right;
+  background-color: #076aff;
+  color: rgb(227, 230, 255);
+  border: none;
+  border-radius: 30px;
+  padding: 10px 25px;
+  box-shadow: 0px 10px 40px -15px rgba(7, 106, 255, 1);
+  position: relative;
+  bottom: 5vh;
+}
+
+.submit:focus,
+.submit:active {
+  outline: none;
+}
+
+.submit img {
+  transform: rotate(-90deg);
+  filter: invert(1);
+  width: 14px;
+  margin-left: 10px;
+}
+
+select[name='priority'] {
+  position: relative;
+  left: 145px;
+  bottom: 71px;
+  opacity: 0.5;
+  width: 30px;
+  border-width: 10px;
+  border-color: rgb(208 214 237);
+  background-color: rgb(0, 163, 180);
+  font-family: Montserrat, sans-serif;
+  margin-top: 20px;
+  margin-left: 20px;
+  border-radius: 30px;
+  padding: 12px 5px;
+  padding-left: 30px;
+  -moz-appearance: none; /* Firefox */
+  -webkit-appearance: none; /* Safari and Chrome */
+  appearance: none;
+}
+
+select:focus {
+  outline: none;
+}
+
+input[type='color'] {
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 128px;
+  border-radius: 30px;
+}
+
+.colorInput button {
+  border-radius: 50px;
+  text-align: center;
+  width: 24px;
+  height: 24px;
+  background-color: #fff;
+  color: #111f55;
+  border-color: #babfcf;
+  opacity: 80%;
+  margin-left: 10px;
+}

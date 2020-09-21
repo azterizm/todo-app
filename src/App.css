@@ -7,24 +7,6 @@
   -webkit-text-stroke: 0.5px;
 }
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-}
-
-nav img:first-child {
-  width: 20px;
-}
-
-nav img:last-child {
-  width: 15px;
-}
-
-nav img {
-  padding: 30px 50px;
-}
-
 .container {
   width: 85%;
   margin: 0 auto;
@@ -42,91 +24,14 @@ nav img {
 }
 
 h3 {
-  color: #cdcdd7;
+  color: #cecdd8;
   margin-bottom: 20px;
   margin-left: 8px;
   font-size: 24px;
 }
 
-#todoList {
-  display: flex;
-  flex-direction: column;
-  margin-left: 35px;
-  margin-top: 1em;
-}
-
-.todo {
-  position: relative;
-  border-top: 1px solid #f1f3f8;
-}
-
-.todo:last-of-type {
-  border-bottom: 1px solid #f1f3f1;
-}
-
-.status {
-  position: absolute;
-  border: 3px solid #cdcdd7;
-  border-radius: 50px;
-  padding: 8px;
-  left: -45px;
-  top: 27px;
-  transition: border 0.7s, background 0.7s, content 0.7s;
-}
-
-.status.pending {
-  background-color: #fff;
-}
-
-.status.failed {
-  border-color: #ef4e61;
-}
-
-.status.success {
-  background-color: #51dc8e;
-  border: none;
-  padding: 8px;
-  content: url('./assets/checked.png');
-  width: 8px;
-}
-
-.priority {
-  position: absolute;
-  border: 2px solid #cdcdd7;
-  border-radius: 50px;
-  padding: 4px 8px;
-  right: 2.5px;
-  bottom: 35px;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 80px;
-}
-
-.content p {
-  margin: 0;
-  margin-bottom: 5px;
-}
-
-.content pre {
-  margin: 0;
-  margin-top: 5px;
-}
-
-.addTodoButton {
-  position: absolute;
-  bottom: 50px;
-  background-color: #6478d3;
-  border: none;
-  color: #fff;
-  border-radius: 50%;
-  padding: 20px 25px;
-  font-size: 24px;
-  font-weight: lighter;
-  left: calc(50% - 45px);
-  display: block;
-  z-index: 99;
+h1,
+p,
+pre {
+  color: #22242b;
 }
