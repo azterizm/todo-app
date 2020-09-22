@@ -6,7 +6,6 @@ import { fetchTodos, selectAllTodos } from '../state/todoSlice';
 
 export const TodoList = () => {
   const todos = useSelector(selectAllTodos);
-  console.log('todos: ', todos);
   const status = useSelector((state) => state.todos.status);
   const error = useSelector((state) => state.todos.error);
   const dispatch = useDispatch();
@@ -76,14 +75,33 @@ export const TodoList = () => {
         </div>
       );
     }
+    return '';
   });
+
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  const currentDate = new Date();
+  const headerDate =
+    months[currentDate.getMonth()].slice(0, 3) + ' ' + currentDate.getDate();
 
   return (
     <main>
       <div className="container">
         <div className="heading">
           <h1>TO-DO</h1>
-          <h3>NOV 23</h3>
+          <h3>{headerDate}</h3>
         </div>
         <div id="todoList">
           {fallbackContent}
