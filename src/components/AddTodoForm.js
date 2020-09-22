@@ -4,7 +4,7 @@ import '../styles/AddTodo.css';
 import calender from '../assets/calendar.png';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { addTodo, fetchTodos } from '../state/todoSlice';
+import { addTodo } from '../state/todoSlice';
 
 export const AddTodoForm = () => {
   const [todo, setTodo] = useState('');
@@ -32,6 +32,7 @@ export const AddTodoForm = () => {
   if (showDateTime) {
     const date = new Date().toISOString();
     const minValue = date.slice(0, 11) + '00:00';
+
     DateTimeInput = (
       <>
         <input

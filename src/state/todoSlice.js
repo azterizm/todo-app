@@ -20,12 +20,19 @@ const todoSlice = createSlice({
         db.collection('todos')
           .doc(id)
           .set({
+            id: id,
             todo: todo,
             when: date + ' ' + time,
             priority: priority,
             status: 'pending',
           });
-        state.todos.push(action.payload);
+        state.todos.push({
+          id: id,
+          todo: todo,
+          when: date + ' ' + time,
+          priority: priority,
+          status: 'pending',
+        });
       },
       prepare: (todo, priority, date, time) => {
         return {
