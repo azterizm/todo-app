@@ -10,9 +10,19 @@ const App = () => {
       <Switch>
         <Route exact path="/">
           <Navbar />
-          <TodoList />
+          <TodoList showFuture={false} />
         </Route>
         <Route exact path="/add" component={AddTodoForm} />
+        <Route
+          exact
+          path="/all"
+          render={() => (
+            <>
+              <Navbar />
+              <TodoList showFuture={true} />
+            </>
+          )}
+        />
       </Switch>
     </BrowserRouter>
   );

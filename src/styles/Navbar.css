@@ -8,10 +8,39 @@ nav img:first-child {
   width: 20px;
 }
 
-nav img:last-child {
+nav img:nth-of-type(2) {
   width: 15px;
 }
 
 nav img {
+  cursor: pointer;
   padding: 30px 50px;
+}
+
+.sidebar {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  position: absolute;
+  min-height: 80%;
+  background-color: #f8f8f8;
+  top: 80px;
+  left: 0;
+  z-index: 99;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  display: flex;
+  align-items: center;
+  -webkit-box-shadow: 8px 0px 37px 2px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 8px 0px 37px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 8px 0px 37px 2px rgba(0, 0, 0, 0.25);
+}
+
+.sidebar ul {
+  list-style: none;
+  padding-right: 80px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #22242b;
 }

@@ -10,6 +10,7 @@ const todoSlice = createSlice({
   name: 'todo',
   initialState: {
     todos: [],
+    checkTodo: false,
     status: 'idle',
     error: null,
   },
@@ -46,6 +47,43 @@ const todoSlice = createSlice({
         };
       },
     },
+    checkTodo: (state, action) => {
+      // Find action payload
+      state.checkTodo = !state.checkTodo;
+      const docRef = db.collection('todos').doc(action.payload);
+
+      if (state.checkTodo) {
+        docRef.update({ status: 'success' });
+        const target = state.todos.find((todo) => todo.id === action.payload);
+        target.status = 'success';
+      } else {
+        docRef.update({ status: 'pending' });
+        const target = state.todos.find((todo) => todo.id === action.payload);
+        target.status = 'pending';
+      }
+    },
+    pendingTodo: (state, action) => {
+      const docRef = db.collection('todos').doc(action.payload);
+      docRef.update({ status: 'pending' });
+      const target = state.todos.find((todo) => todo.id === action.payload);
+      target.status = 'pending';
+    },
+    successTodo: (state, action) => {
+      const docRef = db.collection('todos').doc(action.payload);
+      docRef.update({ status: 'success' });
+      const target = state.todos.find((todo) => todo.id === action.payload);
+      target.status = 'success';
+    },
+    failedTodo: (state, action) => {
+      const docRef = db.collection('todos').doc(action.payload);
+      docRef.update({ status: 'failed' });
+      const target = state.todos.find((todo) => todo.id === action.payload);
+      target.status = 'failed';
+    },
+    deleteTodo: (state, action) => {
+      const docRef = db.collection('todos').doc(action.payload);
+      docRef.delete();
+    },
   },
   extraReducers: {
     [fetchTodos.pending]: (state, action) => {
@@ -62,7 +100,14 @@ const todoSlice = createSlice({
   },
 });
 
-export const { addTodo } = todoSlice.actions;
+export const {
+  addTodo,
+  checkTodo,
+  pendingTodo,
+  successTodo,
+  failedTodo,
+  deleteTodo,
+} = todoSlice.actions;
 
 export default todoSlice.reducer;
 export const selectAllTodos = (state) => state.todos.todos;

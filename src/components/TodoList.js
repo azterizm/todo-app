@@ -2,17 +2,23 @@ import React, { useEffect } from 'react';
 import '../styles/TodoList.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTodos, selectAllTodos } from '../state/todoSlice';
+import {
+  fetchTodos,
+  selectAllTodos,
+  failedTodo,
+  checkTodo,
+  deleteTodo,
+} from '../state/todoSlice';
 
-export const TodoList = () => {
+export const TodoList = ({ showFuture = false }) => {
   const todos = useSelector(selectAllTodos);
   const status = useSelector((state) => state.todos.status);
   const error = useSelector((state) => state.todos.error);
   const dispatch = useDispatch();
+  const currentDate = new Date();
 
   useEffect(() => {
     if (status === 'idle') {
-      //Create local storage for this
       dispatch(fetchTodos());
     }
   }, [dispatch, status]);
@@ -43,9 +49,21 @@ export const TodoList = () => {
       ''
     );
 
+  todos.forEach((todo) => {
+    const currentDay = currentDate.getDate();
+    const todoDay = new Date(todo.when).getDate();
+    if (todoDay < currentDay) {
+      if (todo.status === 'pending') {
+        dispatch(failedTodo(todo.id));
+      } else if (todo.status === 'success') {
+        dispatch(deleteTodo(todo.id));
+      }
+    }
+  });
+
   const content = todos.map((todo, i) => {
     const dateTime = new Date(todo.when).toLocaleTimeString();
-    const currentDateTime = new Date().toLocaleTimeString();
+    const currentDateTime = currentDate.toLocaleTimeString();
     const showDate =
       currentDateTime === dateTime
         ? ''
@@ -61,19 +79,44 @@ export const TodoList = () => {
         <div className={`priority ${todo.priority}`}></div>
       );
 
-    const date = new Date().toLocaleDateString();
+    const date = currentDate.toLocaleDateString();
     const todoDate = new Date(todo.when).toLocaleDateString();
-    if (date >= todoDate) {
+
+    //Sort this list
+    if (showFuture) {
       return (
         <div className="todo" key={i}>
-          <div className={`status ${todo.status}`}></div>
-          <div className="content">
+          <div
+            className={`status ${todo.status}`}
+            onClick={() => {
+              dispatch(checkTodo(todo.id));
+            }}
+          ></div>
+          <div className={`content ${todo.status}`}>
             <p>{todo.todo}</p>
             <pre>{showDate}</pre>
           </div>
           {priority}
         </div>
       );
+    } else {
+      if (todoDate <= date) {
+        return (
+          <div className="todo" key={i}>
+            <div
+              className={`status ${todo.status}`}
+              onClick={() => {
+                dispatch(checkTodo(todo.id));
+              }}
+            ></div>
+            <div className={`content ${todo.status}`}>
+              <p>{todo.todo}</p>
+              <pre>{showDate}</pre>
+            </div>
+            {priority}
+          </div>
+        );
+      }
     }
     return '';
   });
@@ -92,15 +135,16 @@ export const TodoList = () => {
     'November',
     'December',
   ];
-  const currentDate = new Date();
   const headerDate =
     months[currentDate.getMonth()].slice(0, 3) + ' ' + currentDate.getDate();
+
+  const headerHeading = showFuture ? 'ALL TO-DO' : 'TO-DO';
 
   return (
     <main>
       <div className="container">
         <div className="heading">
-          <h1>TO-DO</h1>
+          <h1>{headerHeading}</h1>
           <h3>{headerDate}</h3>
         </div>
         <div id="todoList">
