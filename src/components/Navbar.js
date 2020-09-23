@@ -3,12 +3,22 @@ import menu from '../assets/menu.svg';
 import search from '../assets/magnifying-glass.svg';
 import '../styles/Navbar.css';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeSearch } from '../state/todoSlice';
 
 export const Navbar = () => {
-  //Make this false after test
   const [navToggler, setNavToggler] = useState(false);
+  const [searchToggler, setSearchToggler] = useState(false);
+  const dispatch = useDispatch();
+  const searchValue = useSelector((state) => state.todos.search);
+  const time = new Date().getHours();
+  const showTime = time > 12 ? time - 12 : time;
+
+  const searchStyle = searchToggler ? { position: 'absolute', right: '260px' } : {};
+
   return (
     <nav>
+      <div className="time">{showTime}</div>
       <img
         src={menu}
         alt="Menu"
@@ -16,7 +26,14 @@ export const Navbar = () => {
         height="30"
         onClick={() => setNavToggler((e) => !e)}
       />
-      <img src={search} alt="Search" width="30" height="30" />
+      <img
+        src={search}
+        alt="Search"
+        width="30"
+        height="30"
+        style={searchStyle}
+        onClick={() => setSearchToggler((e) => !e)}
+      />
       {navToggler && (
         <div className="sidebar">
           <ul className="sidebarList">
@@ -29,6 +46,18 @@ export const Navbar = () => {
               <li className="sidebarItem">All Todos</li>
             </Link>
           </ul>
+        </div>
+      )}
+      {searchToggler && (
+        <div className="search">
+          <input
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Search..."
+            value={searchValue}
+            onChange={(e) => dispatch(changeSearch(e.target.value))}
+          />
         </div>
       )}
     </nav>

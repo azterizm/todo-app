@@ -23,7 +23,6 @@
   left: -45px;
   top: 27px;
   background-color: #fff;
-  transition: background-color 0.7 ease;
 }
 
 .status.pending {

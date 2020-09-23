@@ -11,11 +11,13 @@ import {
 } from '../state/todoSlice';
 
 export const TodoList = ({ showFuture = false }) => {
-  const todos = useSelector(selectAllTodos);
+  const fetchedTodos = useSelector(selectAllTodos);
   const status = useSelector((state) => state.todos.status);
   const error = useSelector((state) => state.todos.error);
+  const search = useSelector((state) => state.todos.search);
   const dispatch = useDispatch();
   const currentDate = new Date();
+  const todos = fetchedTodos.filter((todo) => (search ? todo.todo === search : todo));
 
   useEffect(() => {
     if (status === 'idle') {
@@ -40,8 +42,8 @@ export const TodoList = ({ showFuture = false }) => {
       <div className="todo" style={{ border: 'none', textAlign: 'left' }}>
         <div className="content">
           <p>
-            No Todos today, mate! <br />
-            Add one below or Go Enjoy!
+            No todos found. <br />
+            Try typing clearly in the search bar <br /> or add a new todo from below.
           </p>
         </div>
       </div>
@@ -94,7 +96,9 @@ export const TodoList = ({ showFuture = false }) => {
           ></div>
           <div className={`content ${todo.status}`}>
             <p>{todo.todo}</p>
-            <pre>{showDate}</pre>
+            <pre>
+              {showDate} {new Date(todo.when).toLocaleDateString()}
+            </pre>
           </div>
           {priority}
         </div>

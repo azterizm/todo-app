@@ -10,6 +10,7 @@ const todoSlice = createSlice({
   name: 'todo',
   initialState: {
     todos: [],
+    search: '',
     checkTodo: false,
     status: 'idle',
     error: null,
@@ -84,6 +85,9 @@ const todoSlice = createSlice({
       const docRef = db.collection('todos').doc(action.payload);
       docRef.delete();
     },
+    changeSearch: (state, action) => {
+      state.search = action.payload;
+    },
   },
   extraReducers: {
     [fetchTodos.pending]: (state, action) => {
@@ -107,6 +111,7 @@ export const {
   successTodo,
   failedTodo,
   deleteTodo,
+  changeSearch,
 } = todoSlice.actions;
 
 export default todoSlice.reducer;
