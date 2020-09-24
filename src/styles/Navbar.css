@@ -51,7 +51,11 @@ nav img {
 }
 
 .search {
-  margin-top: 10px;
+  margin-top: 12px;
+}
+
+.search input {
+  background: none;
 }
 
 .time {
