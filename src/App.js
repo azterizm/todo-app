@@ -8,15 +8,20 @@ import { auth } from './develop';
 import { Login } from './components/Login';
 
 const App = () => {
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
+  if (loading) {
+    return '';
+  }
+
   if (!user) {
     return <Login />;
   }
+
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <Navbar />
+          <Navbar selected={'home'} />
           <TodoList showFuture={false} />
         </Route>
         <Route exact path="/add" component={AddTodoForm} />
@@ -25,7 +30,7 @@ const App = () => {
           path="/all"
           render={() => (
             <>
-              <Navbar />
+              <Navbar selected={'all'} />
               <TodoList showFuture={true} />
             </>
           )}

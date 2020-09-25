@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeSearch } from '../state/todoSlice';
 import { auth } from '../develop';
 
-export const Navbar = () => {
+export const Navbar = ({ selected }) => {
   const [navToggler, setNavToggler] = useState(false);
   const [searchToggler, setSearchToggler] = useState(false);
   const dispatch = useDispatch();
@@ -16,6 +16,7 @@ export const Navbar = () => {
   const showTime = time > 12 ? time - 12 : time;
 
   const searchStyle = searchToggler ? { position: 'absolute', right: '260px' } : {};
+  const selectedStyle = { color: '#6478d3' };
 
   return (
     <nav>
@@ -39,12 +40,17 @@ export const Navbar = () => {
         <div className="sidebar">
           <ul className="sidebarList">
             <Link to="/">
-              <li className="sidebarItem" style={{ color: '#6478d3' }}>
+              <li
+                className="sidebarItem"
+                style={selected === 'home' ? selectedStyle : {}}
+              >
                 Home
               </li>
             </Link>
             <Link to="/all">
-              <li className="sidebarItem">All Todos</li>
+              <li className="sidebarItem" style={selected === 'all' ? selectedStyle : {}}>
+                All Todos
+              </li>
             </Link>
             <li
               className="sidebarItem"

@@ -8,9 +8,10 @@ export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showSignUp, setShowSignUp] = useState(false);
+  const [error, setError] = useState('');
 
   const loginWithEmailAndPassword = () => {
-    auth.signInWithEmailAndPassword(email, password);
+    auth.signInWithEmailAndPassword(email, password).catch((err) => setError(err));
   };
 
   const loginWithGoogle = () => {
@@ -45,6 +46,7 @@ export const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          {error ? <p style={{ color: 'red' }}>{error.message}</p> : ''}
           <button onClick={loginWithEmailAndPassword}>Sign In</button>
           <button onClick={() => setShowSignUp((e) => !e)}>Create an Account</button>
         </div>
