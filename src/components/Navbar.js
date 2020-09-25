@@ -5,6 +5,7 @@ import '../styles/Navbar.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeSearch } from '../state/todoSlice';
+import { auth } from '../develop';
 
 export const Navbar = () => {
   const [navToggler, setNavToggler] = useState(false);
@@ -45,6 +46,13 @@ export const Navbar = () => {
             <Link to="/all">
               <li className="sidebarItem">All Todos</li>
             </Link>
+            <li
+              className="sidebarItem"
+              onClick={() => auth.signOut()}
+              style={{ cursor: 'pointer' }}
+            >
+              Logout
+            </li>
           </ul>
         </div>
       )}
