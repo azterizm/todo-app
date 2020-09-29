@@ -15,9 +15,10 @@ export const TodoList = ({ showFuture = false }) => {
   const status = useSelector((state) => state.todos.status);
   const error = useSelector((state) => state.todos.error);
   const search = useSelector((state) => state.todos.search);
+  const todos = fetchedTodos.filter((todo) => (search ? todo.todo === search : todo));
+
   const dispatch = useDispatch();
   const currentDate = new Date();
-  const todos = fetchedTodos.filter((todo) => (search ? todo.todo === search : todo));
 
   useEffect(() => {
     if (status === 'idle') {

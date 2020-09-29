@@ -5,6 +5,7 @@ import calender from '../assets/calendar.png';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../state/todoSlice';
+import { animated, useSpring } from 'react-spring';
 
 export const AddTodoForm = () => {
   const [todo, setTodo] = useState('');
@@ -27,6 +28,10 @@ export const AddTodoForm = () => {
       ? { backgroundColor: '#7833f5' }
       : { backgroundColor: '#fff' };
   const positionStyle = showDateTime ? { position: 'static' } : { position: 'relative' };
+  const containerStyle = useSpring({
+    marginTop: 0,
+    from: { marginTop: 500 },
+  });
 
   let DateTimeInput;
   if (showDateTime) {
@@ -130,7 +135,7 @@ export const AddTodoForm = () => {
   };
 
   return (
-    <div className="container">
+    <animated.div className="container" style={containerStyle}>
       <Link to="/">
         <div className="backButton">
           <p>&#215;</p>
@@ -152,6 +157,6 @@ export const AddTodoForm = () => {
       <button id="add-todo" className="submit" onClick={saveHandler}>
         New todo <img src={arrow} alt="Add todo" width="30" height="30" />
       </button>
-    </div>
+    </animated.div>
   );
 };
