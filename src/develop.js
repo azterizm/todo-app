@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCjR-t6c9DCM8d48Ec3dgkQcTgtmfF9xWI',
@@ -19,3 +20,4 @@ firebase.firestore().enablePersistence();
 export const db = firebase.firestore();
 export const auth = firebase.auth();
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
+export const images = firebase.storage().ref().child('images');

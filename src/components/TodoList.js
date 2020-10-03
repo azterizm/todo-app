@@ -9,6 +9,7 @@ import {
   checkTodo,
   deleteTodo,
 } from '../state/todoSlice';
+import { images } from '../develop';
 
 export const TodoList = ({ showFuture = false }) => {
   const fetchedTodos = useSelector(selectAllTodos);
@@ -145,6 +146,17 @@ export const TodoList = ({ showFuture = false }) => {
 
   const headerHeading = showFuture ? 'ALL TO-DO' : 'TO-DO';
 
+  const downlaodFile = () => {
+    images
+      .child('html.ico')
+      .getDownloadURL()
+      .then((link) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', link);
+        xhr.send();
+      });
+  };
+
   return (
     <main>
       <div className="container">
@@ -160,6 +172,7 @@ export const TodoList = ({ showFuture = false }) => {
           <button className="addTodoButton">+</button>
         </Link>
       </div>
+      <button onClick={downlaodFile}>Download</button>
     </main>
   );
 };

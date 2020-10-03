@@ -6,17 +6,18 @@ import { AddTodoForm } from './components/AddTodoForm';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './develop';
 import { Login } from './components/Login';
-import { animated, useTransition } from 'react-spring';
+import { animated, useTransition, useSpring } from 'react-spring';
 
 const App = () => {
   const [user, loading] = useAuthState(auth);
   const location = useLocation();
 
-  const transitions = useTransition(location, (location) => location.pathname, {
+  const transitions = useTransition(location, location => location.pathname, {
     from: { width: '50%', opacity: 0 },
     enter: { width: '100%', opacity: 1 },
-    leave: { display: 'none' },
+    leave: { display: 'none' }
   });
+
   const loadingStyle = {
     position: 'absolute',
     top: 240,
@@ -24,7 +25,7 @@ const App = () => {
     width: '100%',
     fontFamily: 'Montserrat, sans-serif',
     fontWeight: 'bold',
-    color: 'grey',
+    color: 'grey'
   };
 
   if (loading) {

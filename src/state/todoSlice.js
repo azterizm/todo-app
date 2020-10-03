@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit';
-import { db } from './../develop';
+import { db, images } from './../develop';
 
 export const fetchTodos = createAsyncThunk('todo/fetchTodos', async () => {
   const fetchTodos = await db.collection('todos').get();

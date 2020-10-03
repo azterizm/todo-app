@@ -6,6 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../state/todoSlice';
 import { animated, useSpring } from 'react-spring';
+import { images } from '../develop';
 
 export const AddTodoForm = () => {
   const [todo, setTodo] = useState('');
@@ -13,6 +14,7 @@ export const AddTodoForm = () => {
   const [colorInput, setColorInput] = useState('');
   const [showDateTime, setShowDateTime] = useState(false);
   const [priorityInput, setPriorityInput] = useState('normal');
+  const [image, setImage] = useState('');
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -127,6 +129,12 @@ export const AddTodoForm = () => {
 
     if (todo && priority) {
       dispatch(addTodo(todo, priority, date, time));
+      if (image) {
+        images
+          .child(image.name)
+          .put(image)
+          .catch((err) => console.error(err));
+      }
       history.push('/');
     } else {
       setTodo('Enter something or close from top');
@@ -153,6 +161,13 @@ export const AddTodoForm = () => {
         />
         {DateTimeInput}
         {ColorInput}
+        <input
+          type="file"
+          name="image"
+          id="image"
+          accept="image/png image/jpeg"
+          onChange={(e) => setImage(e.target.files[0])}
+        />
       </div>
       <button id="add-todo" className="submit" onClick={saveHandler}>
         New todo <img src={arrow} alt="Add todo" width="30" height="30" />
